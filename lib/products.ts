@@ -7,11 +7,11 @@ export const PRODUCTS = [
       "The everyday tent home for working pet parents. Three corners: sleeping, eating, play. Mesh windows for airflow. Custom colour, print, size and name stitched on the door. Delivered in 3-5 days.",
     description:
       "The everyday tent home for working pet parents. It has three corners - a soft washable sleeping corner, an eating corner with a dry food feeder and a 3-litre steel water tank that refills the bowl, and a play corner with chew toys and a snuffle mat to hide treats in. Mesh windows keep air flowing. Choose its colour, print and size, and have your dog's name stitched on the door. Delivered in 3-5 days.",
-    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop",
+    image: "/images/doggy dera pic.png",
     images: [
-      "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800&auto=format&fit=crop",
+      "/images/doggy dera pic.png",
+      "/images/doggy dera pic.png",
+      "/images/doggy dera pic.png",
     ],
     features: [
       "Soft, washable sleeping corner",
@@ -33,11 +33,11 @@ export const PRODUCTS = [
       "The royal version. Everything in Doggy Dera, plus battery fan & cooling gel mat, heated pad, AI camera with alerts, key-holder calls, and trip mode.",
     description:
       "The royal version for pet parents who want peace of mind. It has everything in Doggy Dera, plus: automatic comfort - a battery fan and cooling gel mat for heat, and a heated pad for cold, which switch on only when needed; an AI camera linked to the Happy While Away app, which sends Low, Moderate and High alerts; key-holder calls - High alerts also call the neighbour or relative who has your key; trip mode covers 2-7 days away with a daily visitor check-in.",
-    image: "https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=800&auto=format&fit=crop",
+    image: "/images/maharaj dera pic.png",
     images: [
-      "https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1585110396000-13365ea886c0?q=80&w=800&auto=format&fit=crop",
+      "/images/maharaj dera pic.png",
+      "/images/maharaj dera pic.png",
+      "/images/maharaj dera pic.png",
     ],
     features: [
       "Everything in Doggy Dera",

@@ -124,7 +124,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
                 <button
                   key={p.value}
                   onClick={() => setPrint(p)}
-                  className={`w-full py-2 rounded-lg border text-left transition ${
+                  className={`w-full py-2 rounded-lg border text-center transition ${
                     print.value === p.value
                       ? "bg-orange-50 border-orange-200 text-orange-700"
                       : "bg-white border-gray-200 text-gray-700 hover:border-gray-300"
@@ -183,37 +183,41 @@ export function ProductCustomizer({ product }: CustomizerProps) {
             )}
           </div>
         </div>
-      </div>
+        </div>
 
-      <div className="flex items-center gap-4 border-t pt-6">
-        <div className="flex items-center gap-2 border rounded-lg overflow-hidden">
+        <div className="flex items-center gap-4 border-t pt-6">
+          <div className="flex items-center gap-2 border rounded-lg overflow-hidden">
+            <button
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              className="px-4 py-2 hover:bg-gray-100"
+            >
+              <Minus size={18} />
+            </button>
+            <span className="px-4 py-2 text-gray-900 font-medium">{quantity}</span>
+            <button
+              onClick={() => setQuantity((q) => q + 1)}
+              className="px-4 py-2 hover:bg-gray-100"
+            >
+              <Plus size={18} />
+            </button>
+          </div>
           <button
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="px-4 py-2 hover:bg-gray-100"
+            onClick={() => {
+              const msg = `Customization summary for ${product.name}:\nColour: ${colour.name}\nPrint: ${print.name}\nSize: ${size.name}\nName on door: ${name || "None"}\nQuantity: ${quantity}\nPrice: ₹${price.toLocaleString()}\n\nThis will be added to your cart.`;
+              alert(msg);
+              addItem();
+            }}
+            className={`ml-4 flex-1 px-8 py-3 rounded-xl font-bold text-lg transition ${
+              added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
+            }`}
           >
-            <Minus size={18} />
-          </button>
-          <span className="px-4 py-2 text-gray-900 font-medium">{quantity}</span>
-          <button
-            onClick={() => setQuantity((q) => q + 1)}
-            className="px-4 py-2 hover:bg-gray-100"
-          >
-            <Plus size={18} />
+            {added ? "Added to cart!" : (
+              <>
+                <ShoppingCart size={20} className="mr-2" /> Add to Cart
+              </>
+            )}
           </button>
         </div>
-        <button
-          onClick={addItem}
-          className={`ml-4 flex-1 px-8 py-3 rounded-xl font-bold text-lg transition ${
-            added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
-          }`}
-        >
-          {added ? "Added to cart!" : (
-            <>
-              <ShoppingCart size={20} className="mr-2" /> Add to Cart
-            </>
-          )}
-        </button>
-      </div>
     </div>
   )
 }
