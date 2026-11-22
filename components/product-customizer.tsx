@@ -161,7 +161,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
               placeholder="e.g. Bruno"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full py-2 rounded-lg border border-gray-200 text-gray-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition"
+              className="w-full py-2 rounded-lg border border-gray-200 text-center text-gray-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition"
             />
           </div>
         </div>
@@ -207,13 +207,13 @@ export function ProductCustomizer({ product }: CustomizerProps) {
               alert(msg);
               addItem();
             }}
-            className={`ml-4 flex-1 px-8 py-3 rounded-xl font-bold text-lg transition ${
+            className={`ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 ${
               added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
             }`}
           >
             {added ? "Added to cart!" : (
               <>
-                <ShoppingCart size={20} className="mr-2" /> Add to Cart
+                <ShoppingCart size={18} className="mr-0" /> Add to Cart
               </>
             )}
           </button>

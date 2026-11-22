@@ -176,38 +176,26 @@ export default function Home() {
       </section>
 
       {/* Safety promise */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-24">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-24 text-center">
         <div className="rounded-3xl border border-slate-200 bg-slate-900 overflow-hidden p-8 md:p-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white mb-4">
-                Safety promise
-              </h2>
-              <p className="text-slate-300 text-sm leading-relaxed mb-6">
-                Every dera is built with pet-safe materials, breathable mesh, and non-toxic finishes. The AI comfort
-                system switches on only when needed, and every order includes a 1-year warranty.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "✓ Pet-safe materials",
-                  "✓ Breathable mesh",
-                  "✓ 1-year warranty",
-                  "✓ COD & UPI payment",
-                ].map((s) => (
-                  <span key={s} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-medium">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <Image
-                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop"
-                alt="Doggy Dera safety"
-                className="w-full h-64 object-cover rounded-2xl shadow-2xl border border-slate-700"
-                priority
-              />
-            </div>
+          <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white mb-4">
+            Safety promise
+          </h2>
+          <p className="text-slate-300 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+            Every dera is built with pet-safe materials, breathable mesh, and non-toxic finishes. The AI comfort
+            system switches on only when needed, and every order includes a 1-year warranty.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              "✓ Pet-safe materials",
+              "✓ Breathable mesh",
+              "✓ 1-year warranty",
+              "✓ COD & UPI payment",
+            ].map((s) => (
+              <span key={s} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-medium">
+                {s}
+              </span>
+            ))}
           </div>
         </div>
       </section>
