@@ -11,7 +11,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-900">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-black" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585110396000-13365ea886c0?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-30" />
+        <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-30" />
         {/* Decorative paw prints */}
         <div className="absolute top-1/4 left-10 w-12 h-12 bg-orange-500/20 rounded-full blur-md" />
         <div className="absolute top-1/3 right-10 w-8 h-8 bg-orange-500/20 rounded-full blur-md" />
