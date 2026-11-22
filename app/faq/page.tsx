@@ -9,7 +9,7 @@ const FAQS = [
   {
     q: "Can I leave my dog for days in the dera?",
     a:
-      "Yes. The Maharaj Dera with the Trip Mode app plan covers 2–7 days away with a daily visitor check-in. For shorter absences, the Doggy Dera is perfect for everyday use while you're at work.",
+      "Yes. The Maharaj Dera with the Trip Mode app plan covers 2-7 days away with a daily visitor check-in. For shorter absences, the Doggy Dera is perfect for everyday use while you're at work.",
   },
   {
     q: "How does the AI camera alert system work?",
