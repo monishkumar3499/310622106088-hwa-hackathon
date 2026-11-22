@@ -67,7 +67,7 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Accordion */}
-      <section className="relative z-10 max-w-3xl mx-auto px-6 pb-24">
+      <section className="relative z-10 max-w-3xl mx-auto px-6 pb-24 mt-12">
         <div className="space-y-3">
           {FAQS.map((faq, i) => (
             <div key={i} className="group border border-slate-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition">
