@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { ChevronDown, ShieldCheck, Truck, Phone, Clock, Home, AlertCircle } from "lucide-react"
 
