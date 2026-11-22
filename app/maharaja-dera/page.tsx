@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ProductCustomizer } from "@/components/product-customizer"
+import { FeatureCarousel } from "@/components/feature-carousel"
 import {
   AlertTriangle,
   ShieldAlert,
@@ -102,17 +103,7 @@ export default function MaharajaDeraPage() {
         </div>
       </section>
 
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold mb-6">Features</h2>
-        <ul className="grid md:grid-cols-2 gap-4">
-          {(product?.features ?? []).map((f, i) => (
-            <li key={i} className="flex items-center gap-3 text-gray-700">
-              <span className="text-orange-500">✓</span>
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <FeatureCarousel features={product?.features ?? []} />
     </div>
   )
 }

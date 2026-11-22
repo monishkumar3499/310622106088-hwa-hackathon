@@ -109,7 +109,7 @@ export function Header() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={18} className="text-orange-500" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Chennai, Tamil Nadu, India</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={18} className="text-orange-500" />
@@ -182,7 +182,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <MapPin size={16} className="text-orange-500" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Chennai, Tamil Nadu, India</span>
               </li>
               <li className="flex items-center gap-3">
                 <Clock size={16} className="text-orange-500" />

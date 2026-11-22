@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ChevronDown, ShieldCheck, Truck, Phone, Clock, Home, AlertCircle } from "lucide-react"
+import { ChevronDown, AlertCircle } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -48,22 +48,18 @@ const FAQS = [
 export default function FAQPage() {
   return (
     <div className="relative min-h-screen bg-slate-50">
-      {/* Hero */}
-      <section className="relative h-[500px] md:h-[600px] overflow-hidden bg-orange-900">
+      {/* Hero - smaller */}
+      <section className="relative h-[300px] md:h-[350px] overflow-hidden bg-orange-900">
         <div className="absolute inset-0 bg-gradient-to-b from-orange-900 via-orange-900/80 to-black" />
-        {/* Decorative paw prints */}
-        <div className="absolute top-20 left-10 w-16 h-16 bg-orange-500/20 rounded-full blur-xl" />
-        <div className="absolute top-1/3 right-20 w-20 h-20 bg-orange-500/20 rounded-full blur-xl" />
-        <div className="absolute bottom-20 left-40 w-12 h-12 bg-orange-500/20 rounded-full blur-xl" />
         <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
           <div className="max-w-3xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-3">
               Frequently Asked Questions
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+            <h1 className="font-display text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3">
               Everything you need to know
             </h1>
-            <p className="text-lg text-orange-100 max-w-xl mx-auto">
+            <p className="text-base text-orange-100 max-w-xl mx-auto">
               Have questions about our deras, app, or delivery? We've got answers.
             </p>
           </div>
@@ -90,27 +86,6 @@ export default function FAQPage() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Quick links */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 pb-24 text-center">
-        <h2 className="font-display text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-12">
-          Still have questions?
-        </h2>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/"
-            className="px-8 py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
-          >
-            <Home size={20} className="mr-2" /> Shop Now
-          </Link>
-          <Link
-            href="/contact"
-            className="px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-50 transition shadow-sm border border-orange-200 text-orange-700 bg-white"
-          >
-            <Phone size={20} className="mr-2" /> Contact Us
-          </Link>
         </div>
       </section>
     </div>
