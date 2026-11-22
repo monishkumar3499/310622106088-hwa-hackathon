@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ChevronDown, ShieldCheck, Truck, Phone, Clock, Home, PawPrint } from "lucide-react"
+import { ChevronDown, ShieldCheck, Truck, Phone, Clock, Home, AlertCircle } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -79,7 +79,7 @@ export default function FAQPage() {
                 className="flex w-full items-center justify-between px-6 py-4 text-left transition bg-white group-hover:bg-orange-50"
               >
                 <div className="flex items-center gap-4">
-                  <PawPrint size={20} className="text-orange-500" />
+                  <AlertCircle size={20} className="text-orange-500" />
                   <span className="text-lg font-bold text-slate-900">{faq.q}</span>
                 </div>
                 <ChevronDown size={20} className="text-slate-400 group-hover:text-orange-500 transition" />
