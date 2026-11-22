@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#f3f4f6"/>
+  <rect x="100" y="100" width="400" height="240" fill="#d97706" rx="12"/>
+  <rect x="140" y="170" width="120" height="60" fill="#fbbf24" rx="4"/>
+  <rect x="340" y="170" width="120" height="60" fill="#fbbf24" rx="4"/>
+  <rect x="240" y="280" width="120" height="20" fill="#9ca3af" rx="4"/>
+  <text x="300" y="350" font-family="Arial" font-size="18" fill="#6b7280" text-anchor="middle">Doggy Dera</text>
+</svg>
