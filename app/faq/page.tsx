@@ -81,7 +81,7 @@ export default function FAQPage() {
                 </div>
                 <ChevronDown size={20} className="text-slate-400 group-hover:text-orange-500 transition" />
               </button>
-              <div className="px-6 pb-4 text-slate-600 text-sm leading-relaxed">
+              <div className="px-6 pb-4 pt-4 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
                 {faq.a}
               </div>
             </div>
