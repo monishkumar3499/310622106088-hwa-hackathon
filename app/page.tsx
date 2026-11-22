@@ -202,7 +202,7 @@ export default function Home() {
             </div>
             <div className="hidden md:block">
               <Image
-                src="/images/doggy-dera.jpg"
+                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800&auto=format&fit=crop"
                 alt="Doggy Dera safety"
                 className="w-full h-64 object-cover rounded-2xl shadow-2xl border border-slate-700"
                 priority
