@@ -47,9 +47,8 @@ export default function FAQPage() {
   return (
     <div className="relative min-h-screen bg-slate-50">
       {/* Hero */}
-      <section className="relative h-[500px] md:h-[600px] overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-black" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-30" />
+      <section className="relative h-[500px] md:h-[600px] overflow-hidden bg-orange-900">
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-900 via-orange-900/80 to-black" />
         {/* Decorative paw prints */}
         <div className="absolute top-20 left-10 w-16 h-16 bg-orange-500/20 rounded-full blur-xl" />
         <div className="absolute top-1/3 right-20 w-20 h-20 bg-orange-500/20 rounded-full blur-xl" />
@@ -62,7 +61,7 @@ export default function FAQPage() {
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
               Everything you need to know
             </h1>
-            <p className="text-lg text-slate-200 max-w-xl mx-auto">
+            <p className="text-lg text-orange-100 max-w-xl mx-auto">
               Have questions about our deras, app, or delivery? We've got answers.
             </p>
           </div>
