@@ -1,7 +1,5 @@
 import { CheckoutForm } from "@/components/checkout-form"
 
-export const dynamic = "force-dynamic"
-
 export default function CheckoutPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">

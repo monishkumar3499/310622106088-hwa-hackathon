@@ -8,8 +8,6 @@ import {
 } from "lucide-react"
 import { getProduct } from "@/lib/products"
 
-export const dynamic = "force-dynamic"
-
 const ALERTS = [
   {
     level: "Low",

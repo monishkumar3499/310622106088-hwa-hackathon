@@ -1,9 +1,19 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useCart } from "@/components/use-cart"
 import { ShoppingCart } from "lucide-react"
+import { loadCart, cartTotal } from "@/lib/cart"
 
 export function Navbar() {
-  const { itemCount } = useCart()
+  const [cart, setCart] = useState<import("@/lib/cart").CartItem[]>([])
+
+  useEffect(() => {
+    setCart(loadCart())
+  }, [])
+
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0)
+
   return (
     <nav className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
       <div className="flex items-center justify-between px-6 py-4">
@@ -15,9 +25,15 @@ export function Navbar() {
         </Link>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
           <Link href="/" className="hover:text-orange-500 transition">Home</Link>
-          <Link href="/doggy-dera" className="hover:text-orange-500 transition">Doggy Dera</Link>
-          <Link href="/maharaja-dera" className="hover:text-orange-500 transition">Maharaj Dera</Link>
-          <Link href="/compare" className="hover:text-orange-500 transition">Compare</Link>
+          <Link href="/doggy-dera" className="hover:text-orange-500 transition">
+            Doggy Dera
+          </Link>
+          <Link href="/maharaja-dera" className="hover:text-orange-500 transition">
+            Maharaj Dera
+          </Link>
+          <Link href="/compare" className="hover:text-orange-500 transition">
+            Compare
+          </Link>
           <Link href="/faq" className="hover:text-orange-500 transition">FAQ</Link>
         </div>
         <div className="flex items-center gap-4">

@@ -1,7 +1,5 @@
 import { CartList } from "@/components/cart-list"
 
-export const dynamic = "force-dynamic"
-
 export default function CartPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">

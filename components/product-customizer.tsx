@@ -1,8 +1,14 @@
 "use client"
 
-import { useState, useCallback } from "react"
-import { useCart } from "@/components/use-cart"
+import { useState, useEffect, useCallback } from "react"
 import { Palette, Plus, Minus, ShoppingCart } from "lucide-react"
+import type { CartItem } from "@/lib/cart"
+import {
+  loadCart,
+  saveCart,
+  cartTotal,
+  addToCart,
+} from "@/lib/cart"
 
 type CustomizerProps = {
   product: {
@@ -34,7 +40,7 @@ const SIZES = [
 ]
 
 export function ProductCustomizer({ product }: CustomizerProps) {
-  const { addItem } = useCart()
+  const [cart, setCart] = useState<CartItem[]>([])
   const [colour, setColour] = useState(COLOURS[0])
   const [print, setPrint] = useState(PRINTS[0])
   const [size, setSize] = useState(SIZES[0])
@@ -44,8 +50,12 @@ export function ProductCustomizer({ product }: CustomizerProps) {
 
   const price = product.price + size.extra
 
-  const handleAdd = useCallback(() => {
-    addItem({
+  useEffect(() => {
+    setCart(loadCart())
+  }, [])
+
+  const addItem = useCallback(() => {
+    const newCart = addToCart(cart, {
       productId: product.id,
       productName: product.name,
       price,
@@ -58,9 +68,11 @@ export function ProductCustomizer({ product }: CustomizerProps) {
         name,
       },
     })
+    saveCart(newCart)
+    setCart(newCart)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
-  }, [addItem, product, price, quantity, colour, print, size, name])
+  }, [addToCart, product, price, quantity, colour, print, size, name, cart, saveCart])
 
   return (
     <div className="space-y-8">
@@ -185,7 +197,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
           </button>
         </div>
         <button
-          onClick={handleAdd}
+          onClick={addItem}
           className={`ml-4 flex-1 px-8 py-3 rounded-xl font-bold text-lg transition ${
             added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
           }`}

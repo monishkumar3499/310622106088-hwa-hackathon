@@ -1,12 +1,26 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useCart } from "@/components/use-cart"
 import { Plus, Minus, Trash2 } from "lucide-react"
+import type { CartItem } from "@/lib/cart"
+import {
+  loadCart,
+  saveCart,
+  cartTotal,
+  updateCartQuantity,
+  removeCartItem,
+} from "@/lib/cart"
 
 export function CartList() {
-  const { cart, setQuantity, removeItem, total, itemCount } = useCart()
+  const [cart, setCart] = useState<CartItem[]>([])
+
+  useEffect(() => {
+    setCart(loadCart())
+  }, [])
+
+  const total = cartTotal(cart)
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   if (itemCount === 0) {
     return (
@@ -20,6 +34,18 @@ export function CartList() {
         </Link>
       </div>
     )
+  }
+
+  const setQuantity = (productId: string, quantity: number) => {
+    const newCart = updateCartQuantity(cart, productId, quantity)
+    saveCart(newCart)
+    setCart(newCart)
+  }
+
+  const removeItem = (productId: string) => {
+    const newCart = removeCartItem(cart, productId)
+    saveCart(newCart)
+    setCart(newCart)
   }
 
   return (

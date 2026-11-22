@@ -33,3 +33,33 @@ export function saveCart(cart: CartItem[]) {
 export function cartTotal(cart: CartItem[]): number {
   return cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 }
+
+export function addToCart(
+  cart: CartItem[],
+  item: Omit<CartItem, "quantity"> & { quantity?: number }
+): CartItem[] {
+  const existing = cart.find((i) => i.productId === item.productId)
+  if (existing) {
+    return cart.map((i) =>
+      i.productId === item.productId
+        ? { ...i, quantity: i.quantity + (item.quantity ?? 1) }
+        : i
+    )
+  }
+  return [...cart, { ...item, quantity: item.quantity ?? 1 }]
+}
+
+export function updateCartQuantity(
+  cart: CartItem[],
+  productId: string,
+  quantity: number
+): CartItem[] {
+  if (quantity <= 0) {
+    return cart.filter((i) => i.productId !== productId)
+  }
+  return cart.map((i) => (i.productId === productId ? { ...i, quantity } : i))
+}
+
+export function removeCartItem(cart: CartItem[], productId: string): CartItem[] {
+  return cart.filter((i) => i.productId !== productId)
+}

@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { useCart } from "@/components/use-cart"
+import { useState, useEffect } from "react"
+import type { CartItem } from "@/lib/cart"
+import { loadCart, saveCart, cartTotal } from "@/lib/cart"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChevronLeft, Home, MapPin, CreditCard } from "lucide-react"
@@ -25,7 +26,12 @@ const INITIAL: FormData = {
 }
 
 export function CheckoutForm() {
-  const { cart, total, itemCount } = useCart()
+  const [cart, setCart] = useState<CartItem[]>([])
+  useEffect(() => {
+    setCart(loadCart())
+  }, [])
+  const total = cartTotal(cart)
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0)
   const router = useRouter()
   const [form, setForm] = useState<FormData>(INITIAL)
   const [errors, setErrors] = useState<Record<string, string>>({})

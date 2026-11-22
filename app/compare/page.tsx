@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import Link from "next/link"
 import { PRODUCTS } from "@/lib/products"
 import { ShieldCheck, Clock, Users, Smartphone, Camera } from "lucide-react"

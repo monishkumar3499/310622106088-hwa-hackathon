@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import Link from "next/link"
 import { CheckCircle, Truck, Home, Calendar } from "lucide-react"
 

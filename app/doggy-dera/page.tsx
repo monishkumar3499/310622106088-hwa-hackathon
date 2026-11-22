@@ -3,8 +3,6 @@ import Image from "next/image"
 import { ProductCustomizer } from "@/components/product-customizer"
 import { getProduct } from "@/lib/products"
 
-export const dynamic = "force-dynamic"
-
 export default function DoggyDeraPage() {
   const product = getProduct("doggy-dera")
 

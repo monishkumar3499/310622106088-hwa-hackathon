@@ -2,8 +2,6 @@ import Link from "next/link"
 import { ArrowRight, ShieldCheck, Truck, Zap } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 
-export const dynamic = "force-dynamic"
-
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
