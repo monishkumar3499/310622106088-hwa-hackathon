@@ -11,7 +11,12 @@ export default function Home() {
       {/* Hero */}
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-900">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-black" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585110396000-13365ea886c0?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-40" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585110396000-13365ea886c0?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-30" />
+        {/* Decorative paw prints */}
+        <div className="absolute top-1/4 left-10 w-12 h-12 bg-orange-500/20 rounded-full blur-md" />
+        <div className="absolute top-1/3 right-10 w-8 h-8 bg-orange-500/20 rounded-full blur-md" />
+        <div className="absolute bottom-1/4 left-20 w-10 h-10 bg-orange-500/20 rounded-full blur-md" />
+        <div className="absolute bottom-1/3 right-20 w-14 h-14 bg-orange-500/20 rounded-full blur-md" />
         <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
           <div className="max-w-4xl">
             <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6">
@@ -22,20 +27,20 @@ export default function Home() {
             </h1>
             <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-xl mx-auto leading-relaxed">
               Everyday comfort or royal luxury. Mesh airflow, food feeder, 3L steel water tank,
-              AI comfort that switches on only when needed. Delivered in 3–5 days.
+              AI comfort that switches on only when needed. Delivered in 3-5 days.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/doggy-dera"
                 className="px-8 py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
               >
-                Shop Doggy Dera — ₹3,999
+                Shop Doggy Dera - ₹3,999
               </Link>
               <Link
                 href="/maharaja-dera"
                 className="px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-100 transition shadow-sm border border-orange-200 text-orange-700 bg-white"
               >
-                Shop Maharaj Dera — ₹7,999
+                Shop Maharaj Dera - ₹7,999
               </Link>
             </div>
           </div>
@@ -52,10 +57,10 @@ export default function Home() {
           <span className="relative">
             alone<span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-orange-400/60 rounded-full -z-10" />
           </span>{" "}
-          — hot, hungry, bored, or anxious.
+          - hot, hungry, bored, or anxious.
         </h2>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Happy While Away gives your dog a safe, comfortable tent home of its own — with sleeping, eating, and play
+          Happy While Away gives your dog a safe, comfortable tent home of its own - with sleeping, eating, and play
           corners, breathable mesh, and AI comfort that switches on only when needed.
         </p>
       </section>
@@ -101,6 +106,12 @@ export default function Home() {
                     + App Plan ₹149/mo
                   </div>
                 )}
+                {/* Decorative bone */}
+                <div className="absolute bottom-4 left-4 w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center opacity-60 group-hover:opacity-100 transition">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 19c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v1c0 1.1-.9 2-2 2s-2 .9-2 2v1c0 1.1-.9 2-2 2zM19 19c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v1c0 1.1-.9 2-2 2s-2 .9-2 2v1c0 1.1-.9 2-2 2zM12 19c1.1 0 2-.9 2-2v-1c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v1c0 1.1-.9 2-2 2s-2 .9-2 2v1c0 1.1-.9 2-2 2zM5 5c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2V6c0-1.1-.9-2-2-2zM19 5c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2V6c0-1.1-.9-2-2-2zM12 5c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2z" />
+                  </svg>
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-2xl font-bold text-slate-900 mb-1">{product.name}</h3>
@@ -118,7 +129,7 @@ export default function Home() {
                     ₹{product.price}
                   </span>
                   <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Delivered 3–5 days
+                    Delivered 3-5 days
                   </span>
                 </div>
               </div>
@@ -142,9 +153,9 @@ export default function Home() {
             },
             {
               icon: <Truck size={36} className="text-orange-500" />,
-              title: "Delivered in 3–5 days",
+              title: "Delivered in 3-5 days",
               body:
-                "Your dera arrives ready to set up, anywhere in India — with mesh airflow and pet-safe materials.",
+                "Your dera arrives ready to set up, anywhere in India - with mesh airflow and pet-safe materials.",
             },
             {
               icon: <ShieldAlert size={36} className="text-orange-500" />,

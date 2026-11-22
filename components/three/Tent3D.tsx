@@ -178,7 +178,7 @@ export function Hero3D() {
           A real home<span className="text-orange-500"> for your dog</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-100 mt-3 max-w-xl mx-auto drop-shadow drop-shadow-black/40">
-          Everyday comfort or royal luxury — mesh airflow, food feeder, water tank, AI comfort.
+          Everyday comfort or royal luxury - mesh airflow, food feeder, water tank, AI comfort.
         </p>
       </div>
     </div>

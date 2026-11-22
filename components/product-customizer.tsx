@@ -96,19 +96,24 @@ export function ProductCustomizer({ product }: CustomizerProps) {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <label className="text-sm font-medium text-gray-700">Colour</label>
-            <div className="flex gap-3">
+            <div className="flex flex-col items-center gap-4">
               {COLOURS.map((c) => (
-                <button
+                <div
                   key={c.hex}
-                  onClick={() => setColour(c)}
-                  className={`w-10 h-10 rounded-full border-2 transition ${
-                    colour.value === c.value
-                      ? "ring-2 ring-orange-500 scale-110"
-                      : "border-transparent"
-                  }`}
-                  style={{ backgroundColor: c.value }}
-                  aria-label={c.name}
-                />
+                  className="flex flex-col items-center gap-2"
+                >
+                  <button
+                    onClick={() => setColour(c)}
+                    className={`w-12 h-12 rounded-full border-2 transition-all duration-200 ${
+                      colour.value === c.value
+                        ? "ring-3 ring-orange-500 scale-110"
+                        : "border-transparent hover:border-gray-300"
+                    }`}
+                    style={{ backgroundColor: c.value }}
+                    aria-label={c.name}
+                  />
+                  <span className="text-xs font-medium text-slate-600">{c.name}</span>
+                </div>
               ))}
             </div>
           </div>
