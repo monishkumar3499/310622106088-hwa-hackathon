@@ -2,60 +2,18 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import dynamic from "next/dynamic"
 import { ArrowRight, ShieldCheck, Truck, ShieldAlert } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 
 const [d, m] = PRODUCTS
-
-const Hero3D = dynamic(
-  () => import("@/components/three/Tent3D").then((mod) => mod.Hero3D),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-900 flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-black" />
-        <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
-          <div className="max-w-4xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6">
-              Now available
-            </span>
-            <h1 className="font-italic font-serif text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
-              A real home<span className="text-orange-400"> for your dog</span>
-            </h1>
-            <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-xl mx-auto leading-relaxed">
-              Everyday comfort or royal luxury. Mesh airflow, food feeder, 3L steel water tank,
-              AI comfort that switches on only when needed. Delivered in 3-5 days.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/doggy-dera"
-                className="px-8 py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
-              >
-                Shop Doggy Dera - ₹3,999
-              </Link>
-              <Link
-                href="/maharaja-dera"
-                className="px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-100 transition shadow-sm border border-orange-200 text-orange-700 bg-white"
-              >
-                Shop Maharaj Dera - ₹7,999
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-  }
-)
 
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50">
       {/* Hero */}
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
-        <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-100" />
-        <Hero3D />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 pointer-events-none" />
         <div className="relative z-20 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
           <div className="max-w-4xl">
             <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6 italic font-serif">

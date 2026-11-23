@@ -2,23 +2,10 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import dynamic from "next/dynamic"
 import { PRODUCTS } from "@/lib/products"
 import { ShieldCheck, ShieldAlert, Truck, Smartphone } from "lucide-react"
 
 const [d, m] = PRODUCTS
-
-const ProductViewer3D = dynamic(
-  () => import("@/components/three/Tent3D").then((mod) => mod.ProductViewer3D),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
-        <div className="animate-pulse rounded-full w-16 h-16 bg-gray-300" />
-      </div>
-    ),
-  }
-)
 
 const COMPARE_ROWS = [
   {
@@ -143,11 +130,21 @@ export default function ComparePage() {
           </p>
         </div>
 
-        {/* 3D Tent previews side by side */}
+        {/* Product Images side by side */}
         <div className="grid md:grid-cols-2 gap-12 mb-20 items-center">
           <div className="group relative rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl hover:shadow-2xl transition duration-500">
             <div className="relative h-[300px] md:h-[400px] flex items-center justify-center bg-slate-50">
-              <ProductViewer3D colour="#e6dcc8" />
+              <Image
+                src="/images/doggy dera pic.png"
+                alt={d.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/10" />
+              <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
+                ₹{d.price}
+              </div>
             </div>
             <div className="p-8 text-center">
               <h3 className="text-3xl font-bold italic font-italian text-slate-900 mb-2">
@@ -161,7 +158,20 @@ export default function ComparePage() {
           </div>
           <div className="group relative rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl hover:shadow-2xl transition duration-500">
             <div className="relative h-[300px] md:h-[400px] flex items-center justify-center bg-slate-50">
-              <ProductViewer3D colour="#b45309" />
+              <Image
+                src="/images/maharaj dera pic.png"
+                alt={m.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/10" />
+              <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
+                ₹{m.price}
+              </div>
+              <div className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold">
+                + App Plan ₹149/mo
+              </div>
             </div>
             <div className="p-8 text-center">
               <h3 className="text-3xl font-bold italic font-italian text-slate-900 mb-2">
