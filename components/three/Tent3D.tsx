@@ -1,9 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect, Component, ErrorInfo, ReactNode } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { OrbitControls, Stars } from "@react-three/drei"
-import * as THREE from "three"
+import { useState, useEffect } from "react"
 
 type TentProps = {
   colour?: string
@@ -11,234 +8,13 @@ type TentProps = {
   interactive?: boolean
 }
 
-class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
-  state = { hasError: false }
+const scaleBySize: Record<string, number> = { small: 0.85, medium: 1, large: 1.15 }
 
-  static getDerivedStateFromError() {
-    return { hasError: true }
-  }
-
-  componentDidCatch(_error: Error, _errorInfo: ErrorInfo) {}
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
-          <div className="text-center">
-            <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4">
-              <span className="text-orange-600 font-bold text-lg">🎨</span>
-            </div>
-            <p className="text-sm text-slate-600">3D preview unavailable</p>
-          </div>
-        </div>
-      )
-    }
-    return this.props.children
-  }
-}
-
-const scaleBySize: Record<string, number> = { small: 0.7, medium: 1, large: 1.3 }
-
-const COLOURS = {
+const COLOUR_STYLES: Record<string, string> = {
   sand: "#e6dcc8",
   navy: "#1e3a8a",
   olive: "#556b2f",
   rose: "#c08080",
-}
-
-function TentFabric({ color }: { color: string }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.015
-      meshRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.02
-    }
-  })
-  return (
-    <mesh ref={meshRef} castShadow receiveShadow>
-      <boxGeometry args={[2, 1.7, 1.7]} />
-      <meshStandardMaterial
-        color={color}
-        roughness={0.85}
-        metalness={0.05}
-        flatShading
-      />
-    </mesh>
-  )
-}
-
-function TentRoof({ color }: { color: string }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.015
-      meshRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.02
-    }
-  })
-  return (
-    <group ref={meshRef as any}>
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[2.3, 0.08, 1.9]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.75}
-          metalness={0.02}
-          flatShading
-        />
-      </mesh>
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[2.3, 0.55, 0.1]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.75}
-          metalness={0.02}
-          flatShading
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0, 0.275, 0.95]}>
-        <boxGeometry args={[2.3, 0.55, 0.1]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.75}
-          metalness={0.02}
-          flatShading
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[1.15, 0.55, 0]}>
-        <boxGeometry args={[0.1, 0.55, 1.9]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.75}
-          metalness={0.02}
-          flatShading
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[-1.15, 0.55, 0]}>
-        <boxGeometry args={[0.1, 0.55, 1.9]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.75}
-          metalness={0.02}
-          flatShading
-        />
-      </mesh>
-    </group>
-  )
-}
-
-function MeshWindow({
-  position,
-  rotation = [0, 0, 0],
-}: {
-  position: [number, number, number]
-  rotation?: [number, number, number]
-}) {
-  return (
-    <mesh position={position} rotation={rotation}>
-      <planeGeometry args={[0.75, 0.75]} />
-      <meshStandardMaterial
-        color="#bfdbfe"
-        transparent
-        opacity={0.55}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
-  )
-}
-
-function DogBed({ color }: { color: string }) {
-  return (
-    <group position={[0, 0.08, 0]}>
-      <mesh castShadow receiveShadow>
-        <cylinderGeometry args={[0.55, 0.55, 0.14, 24]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.6}
-          metalness={0.05}
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0, 0.075, 0]}>
-        <cylinderGeometry args={[0.5, 0.5, 0.05, 24]} />
-        <meshStandardMaterial
-          color="#f8fafc"
-          roughness={0.95}
-          metalness={0}
-        />
-      </mesh>
-    </group>
-  )
-}
-
-function FoodBowl({ color }: { color: string }) {
-  return (
-    <group position={[0.6, 0.04, 0.4]}>
-      <mesh castShadow receiveShadow>
-        <cylinderGeometry args={[0.18, 0.18, 0.12, 16]} />
-        <meshStandardMaterial
-          color="#94a3b8"
-          roughness={0.3}
-          metalness={0.8}
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0, 0.07, 0]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.08, 16]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.4}
-          metalness={0.6}
-        />
-      </mesh>
-    </group>
-  )
-}
-
-function WaterTank({ color }: { color: string }) {
-  return (
-    <group position={[-0.6, 0.06, 0.4]}>
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[0.3, 0.45, 0.3]} />
-        <meshStandardMaterial
-          color="#cbd5e1"
-          roughness={0.2}
-          metalness={0.1}
-          transparent
-          opacity={0.85}
-        />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0, 0.25, 0]}>
-        <boxGeometry args={[0.28, 0.05, 0.28]} />
-        <meshStandardMaterial color={color} roughness={0.3} metalness={0.7} />
-      </mesh>
-    </group>
-  )
-}
-
-function ChewToy({
-  position,
-  color,
-}: {
-  position: [number, number, number]
-  color: string
-}) {
-  return (
-    <mesh position={position} castShadow receiveShadow>
-      <icosahedronGeometry args={[0.07, 1]} />
-      <meshStandardMaterial color={color} roughness={0.5} metalness={0.1} />
-    </mesh>
-  )
-}
-
-function Floor() {
-  return (
-    <mesh castShadow receiveShadow>
-      <planeGeometry args={[12, 12]} />
-      <meshStandardMaterial
-        color="#f1f5f9"
-        roughness={1}
-        metalness={0}
-      />
-    </mesh>
-  )
 }
 
 export function Tent3D({
@@ -247,82 +23,79 @@ export function Tent3D({
   interactive = true,
 }: TentProps) {
   const s = scaleBySize[size]
+  const bgColor = COLOUR_STYLES[colour] ?? "#e6dcc8"
+  const darker = shadeColor(bgColor, -20)
   const [hovered, setHovered] = useState(false)
-  const cameraRef = useRef<THREE.Camera>(null)
 
   return (
-    <group
-      scale={[s, s, s]}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
+    <div
+      className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center bg-white/30 rounded-2xl overflow-hidden border border-slate-100"
+      style={{ transform: `scale(${s})` }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      <ambientLight intensity={0.5} />
-      <directionalLight
-        position={[5, 10, 5]}
-        intensity={1.5}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-      />
-      <spotLight
-        position={[-5, 8, 5]}
-        intensity={1}
-        castShadow
-        penumbra={0.6}
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-      />
-      <ambientLight intensity={0.3} />
+      {/* Ground shadow */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-32 h-2 bg-black/10 blur-xl rounded-full transition-all duration-300" />
 
-      <Stars radius={60} depth={60} count={300} factor={3} saturation={0.1} />
-
-      <Floor />
-
-      <TentFabric color={colour} />
-      <TentRoof color={colour} />
-
-      <MeshWindow position={[-1.05, 0.15, 0.86]} />
-      <MeshWindow position={[1.05, 0.15, 0.86]} />
-      <MeshWindow position={[0, 0.15, -0.86]} rotation={[0, Math.PI, 0]} />
-
-      <DogBed color="#fbbf24" />
-      <FoodBowl color="#d97706" />
-      <WaterTank color="#0ea5e9" />
-
-      <ChewToy position={[-0.45, 0.05, -0.55]} color="#ef4444" />
-      <ChewToy position={[0.45, 0.05, -0.45]} color="#10b981" />
-      <ChewToy position={[-0.25, 0.05, -0.65]} color="#f59e0b" />
-
-      {interactive && (
-        <OrbitControls
-          makeDefault
-          enablePan={false}
-          enableZoom={hovered}
-          autoRotate={!hovered}
-          autoRotateSpeed={1.5}
-          maxPolarAngle={Math.PI / 2 - 0.1}
-          minDistance={3}
-          maxDistance={10}
-          dampingFactor={0.05}
-          enableDamping
+      {/* Tent body - CSS 3D */}
+      <div className="relative z-10 w-32 h-24 mx-auto">
+        {/* Front face */}
+        <div
+          className="absolute inset-0 bg-orange-200 border-4 border-orange-300 rounded-t-lg transform rotate-x-[20deg] skew-x-[5deg] transform-origin-bottom"
+          style={{ backgroundColor: bgColor }}
         />
-      )}
-    </group>
+        {/* Left face (3D depth) */}
+        <div
+          className="absolute -left-4 top-0 w-4 h-24 bg-orange-300 border-t-4 border-orange-300 border-l-4 border-orange-400 transform skew-y-[-25deg] transform-origin-top-right"
+          style={{ backgroundColor: darker }}
+        />
+        {/* Right face (3D depth) */}
+        <div
+          className="absolute right-4 top-0 w-4 h-24 bg-orange-200 border-t-4 border-orange-300 border-r-4 border-orange-400 transform skew-y-[25deg] transform-origin-top-left"
+          style={{ backgroundColor: bgColor }}
+        />
+        {/* Roof overhang */}
+        <div className="absolute -top-4 left-[-6px] right-[-6px] h-4 bg-orange-500 border-2 border-orange-400 rounded-t-lg transform rotate-x-[15deg] transform-origin-bottom" />
+        {/* Roof peak */}
+        <div className="absolute top-[-12px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-16 border-r-16 border-t-16 border-transparent border-b-orange-500" />
+        {/* Door */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-6 bg-white/20 backdrop-blur rounded-full border-2 border-white/30" />
+        {/* Door arch */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-12 h-4 bg-transparent border-t-4 border-white/40 rounded-t-full" />
+      </div>
+
+      {/* Accessories */}
+      <div className="absolute bottom-10 left-1/4 w-8 h-1 rounded-full bg-amber-300 opacity-60" />
+      <div className="absolute bottom-10 right-1/4 w-8 h-1 rounded-full bg-blue-300 opacity-60" />
+      <div className="absolute bottom-9 left-2/5 w-6 h-6 rounded-full bg-red-400 shadow-lg" />
+      <div className="absolute bottom-9 right-2/5 w-6 h-6 rounded-full bg-green-400 shadow-lg" />
+      <div className="absolute bottom-9 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-yellow-400 shadow-lg" />
+
+      {/* Float animation */}
+      <div className="absolute inset-0 animate-pulse" />
+    </div>
   )
+}
+
+function shadeColor(color: string, percent: number): string {
+  const f = parseInt(color.slice(1), 16)
+  const t = percent < 0 ? 0 : 255
+  const p = percent < 0 ? percent * -1 : percent
+  const R = f >> 16
+  const G = (f >> 8) & 0x00ff
+  const B = f & 0x00ff
+  const calc = (c: number) =>
+    Math.round((t - c) * p / 100) + c
+  const hex = (c: number) =>
+    c.toString(16).padStart(2, "0")
+  return `#${hex(calc(R))}${hex(calc(G))}${hex(calc(B))}`
 }
 
 export function Hero3D() {
   const [mounted, setMounted] = useState(false)
-  const [showModel, setShowModel] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    const timer = setTimeout(() => setShowModel(true), 800)
-    return () => clearTimeout(timer)
   }, [])
 
   if (!mounted) {
@@ -332,7 +105,7 @@ export function Hero3D() {
           <div className="w-24 h-24 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold">H</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight italic font-serif">
             A real home for your dog
           </h1>
         </div>
@@ -341,26 +114,16 @@ export function Hero3D() {
   }
 
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
-      {showModel && (
-        <ErrorBoundary>
-          <Canvas
-            shadows
-            camera={{ position: [0, 2.5, 7], fov: 40 }}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <Tent3D colour="#e6dcc8" size="medium" interactive={false} />
-          </Canvas>
-        </ErrorBoundary>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute inset-0 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight drop-shadow-lg">
+    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-gradient-to-b from-slate-50 via-white to-orange-50">
+      {/* Decorative floating elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-40 animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-40 animate-pulse" style={{ animationDelay: "2s" }} />
+
+      <Tent3D colour="#e6dcc8" size="large" interactive={false} />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+      <div className="relative z-20 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight drop-shadow-lg italic font-serif">
           A real home<span className="text-orange-500"> for your dog</span>
         </h1>
         <p className="text-lg md:text-xl text-slate-100 mt-4 max-w-xl mx-auto drop-shadow drop-shadow-black/40">
@@ -380,23 +143,17 @@ export function ProductViewer3D({ colour = "#e6dcc8" }: { colour?: string }) {
 
   if (!mounted) {
     return (
-      <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center">
+      <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
         <div className="animate-pulse rounded-full w-16 h-16 bg-gray-300" />
       </div>
     )
   }
 
   return (
-    <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
-      <ErrorBoundary>
-        <Canvas
-          shadows
-          camera={{ position: [0, 2.5, 6.5], fov: 40 }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-        >
-          <Tent3D colour={colour} size="large" interactive />
-        </Canvas>
-      </ErrorBoundary>
+    <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-white/50 group">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <Tent3D colour={colour} size="large" interactive />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end pointer-events-none">
         <span className="bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-slate-700 shadow-sm border border-white/50">
