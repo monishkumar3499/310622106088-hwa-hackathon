@@ -52,7 +52,7 @@ export default function MaharajaDeraPage() {
         <span className="text-gray-900 font-medium">{product?.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-4">
           <div className="relative aspect-video rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
             <Image
@@ -71,12 +71,12 @@ export default function MaharajaDeraPage() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-3 overflow-x-auto scrollbar-hide pb-2">
+          <div className="grid grid-cols-3 gap-3">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(view.src)}
-                className={`relative group w-[100px] h-[80px] sm:w-[110px] sm:h-[100px] rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
+                className={`relative group w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
                   selectedImage === view.src
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.3)] bg-orange-50"
                     : "border-slate-200 hover:border-orange-400 hover:shadow-sm"
@@ -89,7 +89,7 @@ export default function MaharajaDeraPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-200"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10" />
-                <div className="absolute bottom-1 left-1 z-10 bg-black/70 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm whitespace-nowrap">
+                <div className="absolute bottom-1 left-1 z-10 bg-black/70 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm whitespace-nowrap">
                   {view.label}
                 </div>
               </button>
@@ -100,17 +100,17 @@ export default function MaharajaDeraPage() {
         <ProductCustomizer product={product!} />
       </div>
 
-      <section className="mt-16 border rounded-2xl p-8 bg-white">
-        <h2 className="text-2xl font-bold mb-6">AI Alert Levels</h2>
-        <p className="text-gray-600 mb-8 max-w-xl">
+      <section className="mt-12 border rounded-2xl p-6 bg-white">
+        <h2 className="text-2xl font-bold mb-4">AI Alert Levels</h2>
+        <p className="text-gray-600 mb-6 max-w-xl">
           The AI camera watches your dog and sends Low, Moderate or High alerts
           to your phone through the Happy While Away app.
         </p>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4">
           {ALERTS.map((a) => (
             <div
               key={a.level}
-              className={`rounded-xl p-6 border text-center ${
+              className={`rounded-xl p-4 border text-center ${
                 a.color === "green"
                   ? "bg-green-50 border-green-100"
                   : a.color === "amber"
@@ -118,7 +118,7 @@ export default function MaharajaDeraPage() {
                     : "bg-red-50 border-red-100"
               }`}
             >
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 ${
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 ${
                 a.color === "green"
                   ? "bg-green-100 text-green-600"
                   : a.color === "amber"
@@ -127,7 +127,7 @@ export default function MaharajaDeraPage() {
               }`}>
                 {a.icon}
               </div>
-              <h3 className="font-bold text-lg mb-2 text-gray-900">{a.level} alert</h3>
+              <h3 className="font-bold text-lg mb-1 text-gray-900">{a.level} alert</h3>
               <p className="text-sm text-gray-600">{a.desc}</p>
             </div>
           ))}

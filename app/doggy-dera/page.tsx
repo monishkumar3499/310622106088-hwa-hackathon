@@ -26,9 +26,8 @@ export default function DoggyDeraPage() {
         <span className="text-gray-900 font-medium">{product?.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-4">
-          {/* Main product image */}
           <div className="relative aspect-video rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
             <Image
               src={selectedImage}
@@ -43,13 +42,12 @@ export default function DoggyDeraPage() {
             </div>
           </div>
 
-          {/* View selector thumbnails - single line, scrollable */}
-          <div className="flex flex-row gap-3 overflow-x-auto scrollbar-hide pb-2">
+          <div className="grid grid-cols-3 gap-3">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(view.src)}
-                className={`relative group w-[100px] h-[80px] sm:w-[110px] sm:h-[100px] rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
+                className={`relative group w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
                   selectedImage === view.src
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.3)] bg-orange-50"
                     : "border-slate-200 hover:border-orange-400 hover:shadow-sm"
@@ -62,7 +60,7 @@ export default function DoggyDeraPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-200"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10" />
-                <div className="absolute bottom-1 left-1 z-10 bg-black/70 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm whitespace-nowrap">
+                <div className="absolute bottom-1 left-1 z-10 bg-black/70 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm whitespace-nowrap">
                   {view.label}
                 </div>
               </button>
