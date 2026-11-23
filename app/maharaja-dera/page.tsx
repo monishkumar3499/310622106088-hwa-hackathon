@@ -71,7 +71,7 @@ export default function MaharajaDeraPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex flex-row gap-3 overflow-x-auto shrink-0 pb-2">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
