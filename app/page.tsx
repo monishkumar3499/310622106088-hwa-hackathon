@@ -16,9 +16,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 pointer-events-none" />
         <div className="relative z-20 flex items-center justify-center h-full px-4 text-center pointer-events-none">
           <div className="max-w-4xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6 italic font-serif">
-              Now available
-            </span>
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight mb-6 drop-shadow-lg italic">
               A real home<span className="text-orange-500"> for your dog</span>
             </h1>
