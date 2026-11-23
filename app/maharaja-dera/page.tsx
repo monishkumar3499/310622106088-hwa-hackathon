@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import nextDynamic from "next/dynamic"
 import { ProductCustomizer } from "@/components/product-customizer"
@@ -8,8 +10,6 @@ import {
   Phone,
 } from "lucide-react"
 import { getProduct } from "@/lib/products"
-
-export const dynamic = "force-dynamic"
 
 const ProductViewer3D = nextDynamic(
   () => import("@/components/three/Tent3D").then((mod) => mod.ProductViewer3D),

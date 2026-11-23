@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap");
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -29,6 +31,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Poppins", sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Playfair Display", serif;
   }
 }
 
@@ -118,5 +124,57 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Premium serif headings */
+  .font-italian {
+    font-family: "Playfair Display", serif;
+  }
+
+  /* Table styles */
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 1.25rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .compare-table thead th {
+    background: #f8fafc;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #d97706;
+  }
+  .compare-table tbody tr:hover {
+    background: #fef7ed;
+  }
+  .compare-table .feature-col {
+    text-align: left;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  .compare-table .check {
+    color: #10b981;
+    font-weight: 700;
+  }
+  .compare-table .cross {
+    color: #94a3b8;
+    font-weight: 700;
+  }
+  .compare-table .price-cell {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #d97706;
+  }
+  .compare-table .plan-cell {
+    font-size: 0.875rem;
+    color: #10b981;
+    font-weight: 600;
   }
 }
