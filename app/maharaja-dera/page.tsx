@@ -45,14 +45,14 @@ export default function MaharajaDeraPage() {
   ]
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
-      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+    <div className="max-w-7xl mx-auto px-4 py-6">
+      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:text-orange-500">Home</Link>
         <span>/</span>
         <span className="text-gray-900 font-medium">{product?.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-12">
+      <div className="grid lg:grid-cols-2 gap-8">
         <div className="flex flex-col gap-4">
           <div className="relative aspect-video rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
             <Image
@@ -63,20 +63,20 @@ export default function MaharajaDeraPage() {
               className="object-cover transition-opacity duration-300"
             />
             <div className="absolute inset-0 bg-black/10" />
-            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
+            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600 sm:text-sm">
               ₹{product?.price}
             </div>
-            <div className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold">
+            <div className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold sm:text-sm">
               + App Plan ₹149/mo
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex flex-row gap-3 overflow-x-auto scrollbar-hide pb-2">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(view.src)}
-                className={`relative group w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden ${
+                className={`relative group w-[100px] h-[80px] sm:w-[110px] sm:h-[100px] rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
                   selectedImage === view.src
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.3)] bg-orange-50"
                     : "border-slate-200 hover:border-orange-400 hover:shadow-sm"
@@ -89,7 +89,7 @@ export default function MaharajaDeraPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-200"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10" />
-                <div className="absolute bottom-1 left-2 z-10 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm">
+                <div className="absolute bottom-1 left-1 z-10 bg-black/70 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm whitespace-nowrap">
                   {view.label}
                 </div>
               </button>
