@@ -3,26 +3,19 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import nextDynamic from "next/dynamic"
 import { ProductCustomizer } from "@/components/product-customizer"
 import { FeatureCarousel } from "@/components/feature-carousel"
 import { getProduct } from "@/lib/products"
 
-const ProductViewer3D = nextDynamic(
-  () => import("@/components/three/Tent3D").then((mod) => mod.ProductViewer3D),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
-        <div className="animate-pulse rounded-full w-16 h-16 bg-gray-300" />
-      </div>
-    ),
-  }
-)
-
 export default function DoggyDeraPage() {
   const product = getProduct("doggy-dera")
-  const [selectedImage, setSelectedImage] = useState<string>(product?.image ?? "/images/doggy dera pic.png")
+  const [selectedImage, setSelectedImage] = useState<string>("/images/doggy dera pic.png")
+
+  const VIEW_IMAGES = [
+    { label: "Left", src: "/images/Doggy Dera — left view@1x.png" },
+    { label: "Right", src: "/images/Doggy Dera — right view@1x.png" },
+    { label: "Inside", src: "/images/Doggy Dera — inside view@1x.png" },
+  ]
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
@@ -47,23 +40,27 @@ export default function DoggyDeraPage() {
               ₹{product?.price}
             </div>
           </div>
-          <div className="mt-6"><ProductViewer3D colour="#e6dcc8" /></div>
-          <div className="grid grid-cols-4 gap-2">
-            {(product?.images ?? []).map((img, i) => (
+
+          <div className="grid grid-cols-3 gap-2">
+            {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
-                onClick={() => setSelectedImage(img)}
-                className={`w-full h-20 object-cover rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-                  selectedImage === img
+                onClick={() => setSelectedImage(view.src)}
+                className={`w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden ${
+                  selectedImage === view.src
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.2)]"
-                    : "border-gray-200 hover:border-orange-400"
+                    : "border-slate-200 hover:border-orange-400"
                 }`}
               >
-                <img
-                  src={img}
-                  alt=""
-                  className="w-full h-full object-cover rounded-md"
+                <Image
+                  src={view.src}
+                  alt={`${view.label} view`}
+                  fill
+                  className="object-cover"
                 />
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                  {view.label}
+                </div>
               </button>
             ))}
           </div>
