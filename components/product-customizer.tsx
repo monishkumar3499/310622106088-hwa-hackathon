@@ -47,12 +47,18 @@ export function ProductCustomizer({ product }: CustomizerProps) {
   const [name, setName] = useState("")
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
+  const [toast, setToast] = useState<{ show: boolean; message: string } | null>(null)
 
   const price = product.price + size.extra
 
   useEffect(() => {
     setCart(loadCart())
   }, [])
+
+  const showToast = (message: string) => {
+    setToast({ show: true, message })
+    setTimeout(() => setToast(null), 3000)
+  }
 
   const addItem = useCallback(() => {
     const newCart = addToCart(cart, {
@@ -71,6 +77,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
     saveCart(newCart)
     setCart(newCart)
     setAdded(true)
+    showToast(`${product.name} added to cart!`)
     setTimeout(() => setAdded(false), 2000)
   }, [addToCart, product, price, quantity, colour, print, size, name, cart, saveCart])
 
@@ -98,10 +105,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
             <label className="text-sm font-medium text-gray-700">Colour</label>
             <div className="flex flex-col items-center gap-4">
               {COLOURS.map((c) => (
-                <div
-                  key={c.hex}
-                  className="flex flex-col items-center gap-2"
-                >
+                <div key={c.hex} className="flex flex-col items-center gap-2">
                   <button
                     onClick={() => setColour(c)}
                     className={`w-12 h-12 rounded-full border-2 transition-all duration-200 ${
@@ -183,7 +187,6 @@ export function ProductCustomizer({ product }: CustomizerProps) {
             )}
           </div>
         </div>
-        </div>
 
         <div className="flex items-center gap-4 border-t pt-6">
           <div className="flex items-center gap-2 border rounded-lg overflow-hidden">
@@ -203,9 +206,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
           </div>
           <button
             onClick={() => {
-              const msg = `Customization summary for ${product.name}:\nColour: ${colour.name}\nPrint: ${print.name}\nSize: ${size.name}\nName on door: ${name || "None"}\nQuantity: ${quantity}\nPrice: ₹${price.toLocaleString()}\n\nThis will be added to your cart.`;
-              alert(msg);
-              addItem();
+              addItem()
             }}
             className={`ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 ${
               added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
@@ -218,6 +219,14 @@ export function ProductCustomizer({ product }: CustomizerProps) {
             )}
           </button>
         </div>
+      </div>
+
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl bg-green-500 text-white shadow-2xl shadow-green-500/40 animate-in slide-in-from-bottom duration-300">
+          <span className="text-sm font-medium">{toast.message}</span>
+          <ShoppingCart size={20} className="ml-2" />
+        </div>
+      )}
     </div>
   )
 }

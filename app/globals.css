@@ -175,4 +175,34 @@
     color: #10b981;
     font-weight: 600;
   }
+
+  /* Dog running animation for loading screen */
+  @keyframes dog_run_left_to_right {
+    0% {
+      transform: translateX(-150%);
+    }
+    100% {
+      transform: translateX(150%);
+    }
+  }
+  @keyframes dog_run_right_to_left {
+    0% {
+      transform: translateX(150%);
+    }
+    100% {
+      transform: translateX(-150%);
+    }
+  }
+  .animate-dog_run_2s_linear_infinite {
+    animation: dog_run_left_to_right 2s linear infinite;
+  }
+  .animate-dog_run_1s_linear_infinite {
+    animation: dog_run_left_to_right 1s linear infinite;
+  }
+  .animate-dog_run_2s_linear_infinite_reverse {
+    animation: dog_run_right_to_left 2s linear infinite;
+  }
+  .animate-dog_run_1s_linear_infinite_reverse {
+    animation: dog_run_right_to_left 1s linear infinite;
+  }
 }

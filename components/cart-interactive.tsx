@@ -12,7 +12,6 @@ import {
   removeCartItem,
   addToCart,
 } from "@/lib/cart"
-import { ProductViewer3D } from "@/components/three/Tent3D"
 
 const FREE_SHIPPING_THRESHOLD = 9999
 
@@ -22,6 +21,8 @@ const COLOUR_HEX: Record<string, string> = {
   Olive: "#556b2f",
   Rose: "#c08080",
 }
+
+const DOG_EMOJIS = ["🐶", "🐕", "🐩", "🦮", "🐕‍🦺"]
 
 export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
   const [cart, setCart] = useState<CartItem[]>([])
@@ -63,24 +64,37 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
 
   if (itemCount === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
-        <div className="w-20 h-20 rounded-full bg-orange-50 flex items-center justify-center mb-6 text-orange-500">
-          <ShoppingCartEmpty size={32} />
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        {/* Animated running dog */}
+        <div className="relative w-full max-w-md h-64 flex items-center justify-center overflow-hidden mb-8">
+          <div className="absolute -left-4 animate-[run_dog_2s_linear_infinite]">
+            <span className="text-6xl">🐕</span>
+          </div>
+          <div className="absolute right-4 opacity-50 blur-xl">
+            <span className="text-6xl">🐾</span>
+          </div>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Your cart is empty</h3>
-        <p className="text-slate-600 mb-8">Add some deras to bring your dog home.</p>
+
+        <div className="w-24 h-24 rounded-full bg-orange-50 flex items-center justify-center mb-6 text-orange-500">
+          <span className="text-5xl">🛒</span>
+        </div>
+        <h3 className="text-2xl font-bold text-slate-900 mb-2">Your cart is empty</h3>
+        <p className="text-slate-600 mb-8 max-w-sm">
+          Add some deras to bring your furry friend home. Your dog is waiting!
+        </p>
         <Link
           href="/"
-          className="px-8 py-3 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/40"
+          className="px-8 py-3 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/40 flex items-center gap-2"
         >
-          Start shopping
+          <span>Start shopping</span>
+          <ArrowRight size={20} />
         </Link>
       </div>
     )
   }
 
   return (
-    <div className="relative">
+    <div className="relative max-w-6xl mx-auto">
       {/* Cart items */}
       <div className="space-y-5">
         {cart.map((item) => {
@@ -89,16 +103,16 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
           return (
             <div
               key={`${item.productId}-${item.customization?.name ?? ""}`}
-              className="group relative flex gap-4 p-5 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+              className="group relative flex gap-5 p-6 rounded-3xl border border-slate-100 bg-white shadow-lg hover:shadow-xl transition-all duration-300"
               onDragStart={() => handleDragStart(item.productId)}
               onDragEnd={handleDragEnd}
               draggable
             >
               {/* 3D Preview thumbnail */}
-              <div className="w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 relative">
-                <div className="absolute inset-0 flex items-center justify-center bg-white/60">
+              <div className="w-24 h-24 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 relative">
+                <div className="absolute inset-0 flex items-center justify-center bg-white/80">
                   <div
-                    className="w-8 h-8 rounded-full"
+                    className="w-10 h-10 rounded-full"
                     style={{ backgroundColor: tentColour }}
                   />
                 </div>
@@ -106,47 +120,54 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
 
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-start mb-1">
-                  <h3 className="font-bold text-slate-900 leading-tight">
+                  <h3 className="font-bold text-slate-900 leading-tight text-lg">
                     {item.productName}
                   </h3>
                   <button
                     onClick={() => removeItem(item.productId)}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg"
                   >
                     <Trash2 size={16} />
                   </button>
                 </div>
                 {item.customization && (
-                  <p className="text-xs text-slate-500 mb-3">
-                    {item.customization.colour} • {item.customization.print} •{" "}
-                    {item.customization.size}{item.customization.name
-                      ? ` • "${item.customization.name}"`
-                      : ""}
+                  <p className="text-sm text-slate-500 mb-3 flex items-center gap-1">
+                    <span className="text-orange-500">{item.customization.colour}</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-400">{item.customization.print}</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-400">{item.customization.size}</span>
+                    {item.customization.name && (
+                      <>
+                        <span className="text-gray-400">•</span>
+                        <span className="text-gray-600 font-medium">"{item.customization.name}"</span>
+                      </>
+                    )}
                   </p>
                 )}
                 {item.appPlan && (
-                  <p className="text-xs text-green-600 font-medium mb-3">
-                    + Happy While Away App Plan (₹149/month)
+                  <p className="text-xs text-green-600 font-medium mb-3 flex items-center gap-1">
+                    <span className="text-green-500">🐾</span> + Happy While Away App Plan (₹149/month)
                   </p>
                 )}
-                <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-orange-600">
+                <div className="flex items-center gap-4">
+                  <span className="text-xl font-bold text-orange-600">
                     ₹{itemTotal.toLocaleString()}
                   </span>
                   <div className="flex items-center gap-1 border border-slate-200 rounded-lg overflow-hidden bg-white">
                     <button
                       onClick={() => setQuantity(item.productId, item.quantity - 1)}
                       disabled={item.quantity <= 1}
-                      className="px-2 py-1 text-slate-600 hover:bg-slate-50 disabled:opacity-40"
+                      className="px-3 py-1.5 text-slate-600 hover:bg-slate-50 disabled:opacity-40"
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="px-2 py-1 text-slate-900 font-medium w-4 text-center">
+                    <span className="px-3 py-1.5 text-slate-900 font-medium w-5 text-center">
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => setQuantity(item.productId, item.quantity + 1)}
-                      className="px-2 py-1 text-slate-600 hover:bg-slate-50"
+                      className="px-3 py-1.5 text-slate-600 hover:bg-slate-50"
                     >
                       <Plus size={14} />
                     </button>
@@ -159,22 +180,27 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
       </div>
 
       {/* Sticky summary */}
-      <div className="mt-6 p-6 rounded-2xl border border-slate-100 bg-white shadow-sm">
+      <div className="mt-8 p-8 rounded-3xl border-2 border-orange-100 bg-white shadow-xl relative overflow-hidden">
+        {/* Decorative paw prints */}
+        <div className="absolute top-0 right-0 opacity-10 text-4xl">🐾</div>
+        <div className="absolute bottom-0 left-0 opacity-10 text-4xl">🐾</div>
+
         <div className="space-y-4">
           {/* Progress bar */}
           <div>
-            <div className="flex justify-between text-xs font-medium text-slate-600 mb-1">
+            <div className="flex justify-between text-sm font-medium text-slate-600 mb-2">
               <span>Order value</span>
               <span>₹{total.toLocaleString()}</span>
             </div>
-            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-orange-500 to-orange-300 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
             {total < FREE_SHIPPING_THRESHOLD && (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <span className="text-orange-500">🐾</span>
                 Add ₹{(FREE_SHIPPING_THRESHOLD - total).toLocaleString()} more for free delivery
               </p>
             )}
@@ -183,7 +209,7 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
           <div className="pt-4 border-t border-slate-100 space-y-2">
             <div className="flex justify-between">
               <span className="text-slate-600">Subtotal</span>
-              <span className="font-bold text-slate-900">₹{total.toLocaleString()}</span>
+              <span className="font-bold text-slate-900 text-lg">₹{total.toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-600 text-sm">Delivery</span>
@@ -193,9 +219,9 @@ export function InteractiveCart({ drawer = false }: { drawer?: boolean } = {}) {
 
           <Link
             href="/checkout"
-            className="w-full py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/40 flex items-center justify-center gap-2"
+            className="w-full py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-2xl font-bold text-lg hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30"
           >
-            <ArrowRight size={20} /> Proceed to Checkout
+            <ArrowRight size={22} /> Proceed to Checkout
           </Link>
         </div>
       </div>
