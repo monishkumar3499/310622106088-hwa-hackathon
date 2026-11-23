@@ -12,6 +12,7 @@ export default function DoggyDeraPage() {
   const [selectedImage, setSelectedImage] = useState<string>("/images/doggy dera pic.png")
 
   const VIEW_IMAGES = [
+    { label: "Main", src: "/images/doggy dera pic.png" },
     { label: "Left", src: "/images/Doggy Dera — left view@1x.png" },
     { label: "Right", src: "/images/Doggy Dera — right view@1x.png" },
     { label: "Inside", src: "/images/Doggy Dera — inside view@1x.png" },
@@ -27,7 +28,8 @@ export default function DoggyDeraPage() {
 
       <div className="grid lg:grid-cols-2 gap-12">
         <div className="flex flex-col gap-4">
-          <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
+          {/* Main product image */}
+          <div className="relative aspect-video rounded-3xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
             <Image
               src={selectedImage}
               alt={product?.name ?? "Doggy Dera"}
@@ -41,24 +43,26 @@ export default function DoggyDeraPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2">
+          {/* View selector thumbnails */}
+          <div className="grid grid-cols-3 gap-3">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(view.src)}
-                className={`w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden ${
+                className={`relative group w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden ${
                   selectedImage === view.src
-                    ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.2)]"
-                    : "border-slate-200 hover:border-orange-400"
+                    ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.3)] bg-orange-50"
+                    : "border-slate-200 hover:border-orange-400 hover:shadow-sm"
                 }`}
               >
                 <Image
                   src={view.src}
                   alt={`${view.label} view`}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-200"
                 />
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10" />
+                <div className="absolute bottom-1 left-2 z-10 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm">
                   {view.label}
                 </div>
               </button>
