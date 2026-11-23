@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { CheckCircle, Home, Calendar } from "lucide-react"
+import { CheckCircle, Home } from "lucide-react"
 
 export default function OrderConfirmationPage() {
   const params = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search)
@@ -42,18 +42,12 @@ export default function OrderConfirmationPage() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <div className="flex justify-center gap-4 mb-10">
         <Link
           href="/"
           className="px-8 py-3 bg-orange-500 text-white rounded-xl font-semibold hover:bg-orange-600 transition"
         >
           <Home size={20} className="mr-2" /> Shop more
-        </Link>
-        <Link
-          href="/faq"
-          className="px-8 py-3 border border-gray-200 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition"
-        >
-          <Calendar size={20} className="mr-2" /> Track delivery
         </Link>
       </div>
     </div>
