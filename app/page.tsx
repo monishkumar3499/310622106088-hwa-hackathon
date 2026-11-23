@@ -26,7 +26,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/doggy-dera"
-                className="w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm sm:text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
+                className="w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm sm:text-lg italic font-serif hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
               >
                 Shop Doggy Dera - ₹3,999
               </Link>

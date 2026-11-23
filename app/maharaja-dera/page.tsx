@@ -71,12 +71,12 @@ export default function MaharajaDeraPage() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-3 overflow-x-auto shrink-0 pb-2">
+          <div className="flex flex-row gap-3 overflow-x-auto scrollbar-hide pb-2">
             {VIEW_IMAGES.map((view, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(view.src)}
-                className={`relative group w-full h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
+                className={`relative group w-24 h-24 rounded-xl border-2 cursor-pointer transition-all duration-200 overflow-hidden shrink-0 ${
                   selectedImage === view.src
                     ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.3)] bg-orange-50"
                     : "border-slate-200 hover:border-orange-400 hover:shadow-sm"
