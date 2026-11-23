@@ -101,7 +101,7 @@ export default function MaharajaDeraPage() {
       </div>
 
       <section className="mt-12 border rounded-2xl p-6 bg-white">
-        <h2 className="text-2xl font-bold mb-4">AI Alert Levels</h2>
+        <h2 className="text-2xl font-bold mb-6">AI Alert Levels</h2>
         <p className="text-gray-600 mb-6 max-w-xl">
           The AI camera watches your dog and sends Low, Moderate or High alerts
           to your phone through the Happy While Away app.

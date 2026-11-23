@@ -32,7 +32,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/maharaja-dera"
-                className="px-6 py-3 bg-orange-100 text-white rounded-xl font-bold text-sm sm:text-lg hover:bg-orange-100 transition shadow-sm border border-orange-200 text-orange-700 bg-white"
+                className="w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm sm:text-lg hover:bg-orange-600 transition shadow-lg shadow-orange-500/30"
               >
                 Shop Maharaj Dera - ₹7,999
               </Link>
