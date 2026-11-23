@@ -17,6 +17,22 @@ export const metadata: Metadata = {
       "Doggy Dera (₹3,999) and Maharaj Dera (₹7,999) - tent homes for dogs with AI camera alerts and trip mode.",
     type: "website",
   },
+  icons: {
+    icon: [
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        url: "/favicon.svg",
+      },
+    ],
+    apple: [
+      {
+        rel: "apple-touch-icon",
+        type: "image/svg+xml",
+        url: "/favicon.svg",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({

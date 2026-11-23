@@ -5,10 +5,11 @@ import type { CartItem } from "@/lib/cart"
 import { loadCart, saveCart, cartTotal } from "@/lib/cart"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, Home, MapPin, CreditCard } from "lucide-react"
+import { ChevronLeft, Home, MapPin, CreditCard, Mail } from "lucide-react"
 
 interface FormData {
   name: string
+  email: string
   phone: string
   address: string
   pincode: string
@@ -18,6 +19,7 @@ interface FormData {
 
 const INITIAL: FormData = {
   name: "",
+  email: "",
   phone: "",
   address: "",
   pincode: "",
@@ -54,6 +56,9 @@ export function CheckoutForm() {
   const validate = (): boolean => {
     const next: Record<string, string> = {}
     if (!form.name.trim()) next.name = "Name is required"
+    if (!form.email.trim()) next.email = "Email is required"
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      next.email = "Enter a valid email address"
     if (!/^[6-9]\d{9}$/.test(form.phone))
       next.phone = "Enter a valid 10-digit mobile number"
     if (!form.address.trim()) next.address = "Address is required"
@@ -82,7 +87,7 @@ export function CheckoutForm() {
       if (!res.ok) throw new Error(data.error || "Order failed")
       setMessage({ type: "success", text: `Order placed! Order ID: ${data.orderId}` })
       window.localStorage.removeItem("hwa_cart")
-      setTimeout(() => router.push(`/order-confirmation?orderId=${data.orderId}`), 1500)
+      setTimeout(() => router.push(`/order-confirmation?orderId=${data.orderId}&email=${encodeURIComponent(form.email)}`), 1500)
     } catch (err: any) {
       setMessage({ type: "error", text: err.message || "Something went wrong" })
     } finally {
@@ -124,6 +129,14 @@ export function CheckoutForm() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               error={errors.name}
+            />
+            <Field
+              label="Email address"
+              id="email"
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              error={errors.email}
             />
             <Field
               label="Mobile number"

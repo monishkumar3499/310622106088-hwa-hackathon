@@ -1,9 +1,10 @@
 import Link from "next/link"
-import { CheckCircle, Truck, Home, Calendar } from "lucide-react"
+import { CheckCircle, Truck, Home, Calendar, Mail } from "lucide-react"
 
 export default function OrderConfirmationPage() {
   const params = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search)
   const orderId = params.get("orderId") ?? "N/A"
+  const email = params.get("email") ?? ""
 
   const deliveryDate = new Date()
   deliveryDate.setDate(deliveryDate.getDate() + 4)
@@ -29,12 +30,31 @@ export default function OrderConfirmationPage() {
           <span className="text-gray-600">Payment</span>
           <span className="font-medium">Cash on Delivery</span>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-4">
           <span className="text-gray-600">Expected delivery</span>
           <span className="font-medium">
             {deliveryDate.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })}
           </span>
         </div>
+        {email && (
+          <div className="flex justify-between items-center mb-4 border-t border-gray-100 pt-4">
+            <span className="text-gray-600">Confirmation email sent to</span>
+            <span className="font-medium text-orange-600">{email}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-10 text-center">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <Mail size={20} className="text-blue-600" />
+          <span className="font-medium text-blue-800">Support Email</span>
+        </div>
+        <p className="text-blue-700 font-medium text-lg">
+          support@happywhileaway.com
+        </p>
+        <p className="text-blue-600 text-sm mt-2">
+          Need help with your order? Email us anytime and we'll respond within 24 hours.
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">

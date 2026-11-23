@@ -18,7 +18,7 @@ export function Header() {
             <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
               H
             </div>
-            <span className="font-display font-bold text-xl tracking-tight text-slate-900">
+            <span className="font-italian font-bold text-xl tracking-tight text-slate-900 italic">
               Happy While Away
             </span>
           </Link>
@@ -136,7 +136,7 @@ export function Footer() {
               <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-sm">
                 H
               </div>
-              <span className="font-display font-bold text-lg text-white tracking-tight">
+              <span className="font-italian font-bold text-lg text-white tracking-tight italic">
                 Happy While Away
               </span>
             </div>
