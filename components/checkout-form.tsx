@@ -5,7 +5,7 @@ import type { CartItem } from "@/lib/cart"
 import { loadCart, saveCart, cartTotal } from "@/lib/cart"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, Home, MapPin } from "lucide-react"
+import { ChevronLeft, Home, MapPin, ShoppingCart } from "lucide-react"
 
 interface FormData {
   name: string
@@ -40,8 +40,12 @@ export function CheckoutForm() {
 
   if (itemCount === 0) {
     return (
-      <div className="text-center py-10">
+      <div className="text-center py-20">
+        <div className="w-24 h-24 rounded-full bg-orange-50 flex items-center justify-center mx-auto mb-6 text-orange-500">
+          <ShoppingCart size={32} />
+        </div>
         <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
+        <p className="text-gray-600 mb-8">Add some deras to bring your dog home.</p>
         <Link href="/" className="px-8 py-3 bg-orange-500 text-white rounded-xl font-semibold hover:bg-orange-600 transition">
           Start shopping
         </Link>
@@ -90,7 +94,7 @@ export function CheckoutForm() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 py-8">
       <div className="flex items-center gap-2 mb-8">
         <Link
           href="/cart"
@@ -157,18 +161,39 @@ export function CheckoutForm() {
             </div>
           </div>
 
+          <div className="mt-8 space-y-4">
+            <h2 className="text-xl font-bold">Payment</h2>
+            <div className="space-y-3">
+              <label className="flex items-center gap-3 cursor-pointer p-3 border rounded-xl hover:bg-gray-50 transition">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="cod"
+                  checked
+                  readOnly
+                  defaultChecked
+                  className="w-5 h-5 text-orange-600"
+                />
+                <div className="flex items-center gap-2">
+                  <Home size={20} className="text-gray-600" />
+                  <span>Cash on Delivery (COD)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 disabled:opacity-60 transition"
+            className="w-full py-5 bg-orange-500 text-white rounded-2xl font-bold text-lg hover:bg-orange-600 disabled:opacity-60 transition"
           >
             {submitting ? "Placing order..." : "Place Order"}
           </button>
         </form>
       </div>
 
-      <div className="mt-12 p-6 border rounded-2xl bg-gray-50">
-        <h2 className="text-xl font-bold mb-4">Order summary</h2>
+      <div className="mt-12 p-8 border rounded-2xl bg-gray-50 shadow-sm">
+        <h2 className="text-xl font-bold mb-6">Order summary</h2>
         <div className="space-y-3 text-sm">
           {cart.map((item) => (
             <div key={item.productId} className="flex justify-between">
