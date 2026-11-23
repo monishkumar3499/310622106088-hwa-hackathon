@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import nextDynamic from "next/dynamic"
@@ -47,6 +48,7 @@ const ALERTS = [
 
 export default function MaharajaDeraPage() {
   const product = getProduct("maharaja-dera")
+  const [selectedImage, setSelectedImage] = useState<string>(product?.image ?? "/images/maharaj dera pic.png")
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
@@ -60,11 +62,11 @@ export default function MaharajaDeraPage() {
         <div className="flex flex-col gap-4">
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
             <Image
-              src={product?.image ?? "/images/maharaj dera pic.png"}
+              src={selectedImage}
               alt={product?.name ?? "Maharaj Dera"}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
+              className="object-cover transition-opacity duration-300"
             />
             <div className="absolute inset-0 bg-black/10" />
             <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
@@ -77,12 +79,21 @@ export default function MaharajaDeraPage() {
           <div className="mt-6"><ProductViewer3D colour="#b45309" /></div>
           <div className="grid grid-cols-4 gap-2">
             {(product?.images ?? []).map((img, i) => (
-              <img
+              <button
                 key={i}
-                src={img}
-                alt=""
-                className="w-full h-20 object-cover rounded-lg border border-gray-200 hover:border-orange-400 cursor-pointer transition"
-              />
+                onClick={() => setSelectedImage(img)}
+                className={`w-full h-20 object-cover rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                  selectedImage === img
+                    ? "border-orange-500 shadow-[0_0_0_4px_rgba(234,179,8,0.2)]"
+                    : "border-gray-200 hover:border-orange-400"
+                }`}
+              >
+                <img
+                  src={img}
+                  alt=""
+                  className="w-full h-full object-cover rounded-md"
+                />
+              </button>
             ))}
           </div>
         </div>
