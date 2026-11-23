@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { Palette, Plus, Minus, ShoppingCart } from "lucide-react"
 import type { CartItem } from "@/lib/cart"
+import Link from "next/link"
 import {
   loadCart,
   saveCart,
@@ -83,7 +84,6 @@ export function ProductCustomizer({ product }: CustomizerProps) {
     setCart(newCart)
     setAdded(true)
     showToast(`${product.name} added to cart!`)
-    setTimeout(() => setAdded(false), 2000)
   }, [addToCart, product, price, quantity, colour, print, size, name, cart, saveCart])
 
   return (
@@ -209,24 +209,25 @@ export function ProductCustomizer({ product }: CustomizerProps) {
               <Plus size={18} />
             </button>
           </div>
-          <button
-            onClick={() => {
-              addItem()
-            }}
-            className={`ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 ${
-              added
-                ? "bg-green-600"
-                : "bg-orange-500 text-white hover:bg-orange-600"
-            } ${
-              dogAnimation ? "animate-[bounce_0.3s_ease-in-out_3]" : ""
-            }`}
-          >
-            {added ? "Added to cart!" : (
-              <>
-                <ShoppingCart size={18} className="mr-0" /> Add to Cart
-              </>
-            )}
-          </button>
+          {added ? (
+            <Link
+              href="/cart"
+              className="ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 bg-green-600 text-white hover:bg-green-700"
+            >
+              Go to Cart
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                addItem()
+              }}
+              className={`ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 bg-orange-500 text-white hover:bg-orange-600 ${
+                dogAnimation ? "animate-[bounce_0.3s_ease-in-out_3]" : ""
+              }`}
+            >
+              <ShoppingCart size={18} className="mr-0" /> Add to Cart
+            </button>
+          )}
         </div>
       </div>
 
