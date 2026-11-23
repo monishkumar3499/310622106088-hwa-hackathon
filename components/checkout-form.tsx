@@ -102,7 +102,6 @@ export function CheckoutForm() {
         >
           <ChevronLeft size={16} /> Back to cart
         </Link>
-        <h1 className="text-2xl font-bold ml-auto">Checkout</h1>
       </div>
 
       {message && (
