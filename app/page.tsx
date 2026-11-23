@@ -53,6 +53,7 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden bg-slate-50">
       {/* Hero */}
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-100" />
         <Hero3D />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
         <div className="relative z-20 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
