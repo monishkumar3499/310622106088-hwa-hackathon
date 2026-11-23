@@ -48,6 +48,7 @@ export function ProductCustomizer({ product }: CustomizerProps) {
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
   const [toast, setToast] = useState<{ show: boolean; message: string } | null>(null)
+  const [dogAnimation, setDogAnimation] = useState(false)
 
   const price = product.price + size.extra
 
@@ -57,7 +58,11 @@ export function ProductCustomizer({ product }: CustomizerProps) {
 
   const showToast = (message: string) => {
     setToast({ show: true, message })
-    setTimeout(() => setToast(null), 3000)
+    setDogAnimation(true)
+    setTimeout(() => {
+      setDogAnimation(false)
+      setToast(null)
+    }, 3000)
   }
 
   const addItem = useCallback(() => {
@@ -209,7 +214,11 @@ export function ProductCustomizer({ product }: CustomizerProps) {
               addItem()
             }}
             className={`ml-4 flex-1 px-6 py-2 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 ${
-              added ? "bg-green-600" : "bg-orange-500 text-white hover:bg-orange-600"
+              added
+                ? "bg-green-600"
+                : "bg-orange-500 text-white hover:bg-orange-600"
+            } ${
+              dogAnimation ? "animate-[bounce_0.3s_ease-in-out_3]" : ""
             }`}
           >
             {added ? "Added to cart!" : (

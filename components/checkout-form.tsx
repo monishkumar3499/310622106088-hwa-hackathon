@@ -5,26 +5,22 @@ import type { CartItem } from "@/lib/cart"
 import { loadCart, saveCart, cartTotal } from "@/lib/cart"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, Home, MapPin, CreditCard, Mail } from "lucide-react"
+import { ChevronLeft, Home, MapPin } from "lucide-react"
 
 interface FormData {
   name: string
-  email: string
   phone: string
   address: string
   pincode: string
   state: string
-  payment: "cod" | "upi"
 }
 
 const INITIAL: FormData = {
   name: "",
-  email: "",
   phone: "",
   address: "",
   pincode: "",
   state: "",
-  payment: "cod",
 }
 
 export function CheckoutForm() {
@@ -56,9 +52,6 @@ export function CheckoutForm() {
   const validate = (): boolean => {
     const next: Record<string, string> = {}
     if (!form.name.trim()) next.name = "Name is required"
-    if (!form.email.trim()) next.email = "Email is required"
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      next.email = "Enter a valid email address"
     if (!/^[6-9]\d{9}$/.test(form.phone))
       next.phone = "Enter a valid 10-digit mobile number"
     if (!form.address.trim()) next.address = "Address is required"
@@ -85,9 +78,10 @@ export function CheckoutForm() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Order failed")
-      setMessage({ type: "success", text: `Order placed! Order ID: ${data.orderId}` })
+      const orderId = data.orderId
       window.localStorage.removeItem("hwa_cart")
-      setTimeout(() => router.push(`/order-confirmation?orderId=${data.orderId}&email=${encodeURIComponent(form.email)}`), 1500)
+      setMessage({ type: "success", text: `Order placed! Order ID: ${orderId}` })
+      setTimeout(() => router.push(`/order-confirmation?orderId=${orderId}`), 1500)
     } catch (err: any) {
       setMessage({ type: "error", text: err.message || "Something went wrong" })
     } finally {
@@ -131,14 +125,6 @@ export function CheckoutForm() {
               error={errors.name}
             />
             <Field
-              label="Email address"
-              id="email"
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              error={errors.email}
-            />
-            <Field
               label="Mobile number"
               id="phone"
               type="tel"
@@ -168,44 +154,6 @@ export function CheckoutForm() {
                 onChange={(e) => setForm({ ...form, state: e.target.value })}
                 error={errors.state}
               />
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold">Payment</h2>
-            <div className="space-y-3">
-              <label className="flex items-center gap-3 cursor-pointer p-3 border rounded-xl hover:bg-gray-50 transition">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="cod"
-                  checked={form.payment === "cod"}
-                  onChange={(e) =>
-                    setForm({ ...form, payment: e.target.value as "cod" | "upi" })
-                  }
-                  className="w-5 h-5 text-orange-600"
-                />
-                <div className="flex items-center gap-2">
-                  <Home size={20} className="text-gray-600" />
-                  <span>Cash on Delivery (COD)</span>
-                </div>
-              </label>
-              <label className="flex items-center gap-3 cursor-pointer p-3 border rounded-xl hover:bg-gray-50 transition">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="upi"
-                  checked={form.payment === "upi"}
-                  onChange={(e) =>
-                    setForm({ ...form, payment: e.target.value as "cod" | "upi" })
-                  }
-                  className="w-5 h-5 text-orange-600"
-                />
-                <div className="flex items-center gap-2">
-                  <CreditCard size={20} className="text-gray-600" />
-                  <span>UPI</span>
-                </div>
-              </label>
             </div>
           </div>
 
