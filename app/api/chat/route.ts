@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 const GOOGLE_API_KEY = process.env.GEMINI_API_KEY
-const MODEL = "models/gemini-1.5-flash"
+const MODEL = "models/gemini-1.0-pro"
 
 export async function POST(req: NextRequest) {
   try {
