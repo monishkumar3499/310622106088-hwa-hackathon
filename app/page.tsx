@@ -14,7 +14,7 @@ export default function Home() {
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
         <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-90" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 pointer-events-none" />
-        <div className="relative z-20 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
+        <div className="relative z-20 flex items-center justify-center h-full px-4 text-center pointer-events-none">
           <div className="max-w-4xl">
             <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6 italic font-serif">
               Now available
@@ -84,7 +84,7 @@ export default function Home() {
             <Link
               key={product.id}
               href={`/${product.id}`}
-              className="group relative block rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-300 transition duration-300"
+              className="group relative block rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:shadow-orange-200 transition-all duration-300 transform-gpu"
             >
               <div className="relative h-64 overflow-hidden">
                 <Image
@@ -92,7 +92,7 @@ export default function Home() {
                   alt={product.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  className="object-cover group-hover:scale-110 transition duration-500"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition" />
                 <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
