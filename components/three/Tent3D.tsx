@@ -1,14 +1,40 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, Component, ErrorInfo, ReactNode } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { OrbitControls, Stars, Text } from "@react-three/drei"
+import { OrbitControls, Stars } from "@react-three/drei"
 import * as THREE from "three"
 
 type TentProps = {
   colour?: string
   size?: "small" | "medium" | "large"
   interactive?: boolean
+}
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false }
+
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
+  componentDidCatch(_error: Error, _errorInfo: ErrorInfo) {}
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4">
+              <span className="text-orange-600 font-bold text-lg">🎨</span>
+            </div>
+            <p className="text-sm text-slate-600">3D preview unavailable</p>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
 }
 
 const scaleBySize: Record<string, number> = { small: 0.7, medium: 1, large: 1.3 }
@@ -317,18 +343,20 @@ export function Hero3D() {
   return (
     <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
       {showModel && (
-        <Canvas
-          shadows
-          camera={{ position: [0, 2.5, 7], fov: 40 }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <Tent3D colour="#e6dcc8" size="medium" interactive={false} />
-        </Canvas>
+        <ErrorBoundary>
+          <Canvas
+            shadows
+            camera={{ position: [0, 2.5, 7], fov: 40 }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Tent3D colour="#e6dcc8" size="medium" interactive={false} />
+          </Canvas>
+        </ErrorBoundary>
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
       <div className="absolute inset-0 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
@@ -360,13 +388,15 @@ export function ProductViewer3D({ colour = "#e6dcc8" }: { colour?: string }) {
 
   return (
     <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
-      <Canvas
-        shadows
-        camera={{ position: [0, 2.5, 6.5], fov: 40 }}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-      >
-        <Tent3D colour={colour} size="large" interactive />
-      </Canvas>
+      <ErrorBoundary>
+        <Canvas
+          shadows
+          camera={{ position: [0, 2.5, 6.5], fov: 40 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        >
+          <Tent3D colour={colour} size="large" interactive />
+        </Canvas>
+      </ErrorBoundary>
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end pointer-events-none">
         <span className="bg-white/80 backdrop-blur px-3 py-1 rounded-full text-xs font-medium text-slate-700 shadow-sm border border-white/50">

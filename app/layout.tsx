@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display, Poppins } from "next/font/google"
 import "./globals.css"
 import { Header, Footer } from "@/components/header-footer"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif", weight: ["400", "600", "700", "900"] })
+const poppins = Poppins({ subsets: ["latin"], variable: "--font-poppins", weight: ["300", "400", "500", "600", "700"] })
 
 export const metadata: Metadata = {
   title: "Happy While Away - Dog Tents for Working Pet Parents",
@@ -24,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
+      <body className={`${inter.variable} ${playfair.variable} ${poppins.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
         <Header />
         <main className="min-h-[calc(100vh-200px)]">{children}</main>
         <Footer />
