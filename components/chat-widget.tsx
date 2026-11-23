@@ -64,10 +64,10 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="relative w-20 h-14 rounded-full bg-orange-500 flex items-center justify-center gap-2 shadow-2xl shadow-orange-500/40 transition-all duration-300 hover:scale-105 active:scale-95"
+          className="relative w-32 h-16 rounded-full bg-orange-500 flex items-center justify-center gap-3 shadow-2xl shadow-orange-500/40 transition-all duration-300 hover:scale-105 active:scale-95"
         >
-          <MessageCircle size={20} className="text-white" />
-          <span className="text-white text-xs font-bold">assistant</span>
+          <MessageCircle size={24} className="text-white" />
+          <span className="text-white text-sm font-extrabold leading-none">assistant</span>
           <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center font-bold border-2 border-white">
             {messages.filter((m) => m.role === "user").length > 0 ? "1" : "0"}
           </span>
