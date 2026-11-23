@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 const GOOGLE_API_KEY = process.env.GEMINI_API_KEY
-const MODEL = "gemini-1.5-flash-latest"
+const MODEL = "gemini-1.5-flash"
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,16 +34,13 @@ Be helpful, friendly, and concise. Answer questions about the deras, pricing, de
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: systemPrompt }],
-            },
-            ...messages.map((m: any) => ({
-              role: m.role === "assistant" ? "model" : "user",
-              parts: [{ text: m.content }],
-            })),
-          ],
+          systemInstruction: {
+            parts: [{ text: systemPrompt }],
+          },
+          contents: messages.map((m: any) => ({
+            role: m.role === "assistant" ? "model" : "user",
+            parts: [{ text: m.content }],
+          })),
           generationConfig: {
             temperature: 0.7,
             maxOutputTokens: 500,
@@ -53,6 +50,8 @@ Be helpful, friendly, and concise. Answer questions about the deras, pricing, de
     )
 
     if (!response.ok) {
+      const errorBody = await response.text()
+      console.error("Google AI API error body:", errorBody)
       throw new Error(`Google AI API error: ${response.status}`)
     }
 
