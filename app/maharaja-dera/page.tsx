@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import nextDynamic from "next/dynamic"
 import { ProductCustomizer } from "@/components/product-customizer"
 import { FeatureCarousel } from "@/components/feature-carousel"
@@ -57,7 +58,23 @@ export default function MaharajaDeraPage() {
 
       <div className="grid lg:grid-cols-2 gap-12">
         <div className="flex flex-col gap-4">
-          <ProductViewer3D colour="#b45309" />
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
+            <Image
+              src={product?.image ?? "/images/maharaj dera pic.png"}
+              alt={product?.name ?? "Maharaj Dera"}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
+              ₹{product?.price}
+            </div>
+            <div className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold">
+              + App Plan ₹149/mo
+            </div>
+          </div>
+          <div className="mt-6"><ProductViewer3D colour="#b45309" /></div>
           <div className="grid grid-cols-4 gap-2">
             {(product?.images ?? []).map((img, i) => (
               <img

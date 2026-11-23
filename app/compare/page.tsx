@@ -251,6 +251,17 @@ export default function ComparePage() {
               </p>
             </div>
           ))}
+          <div className="p-8 rounded-3xl border-2 border-orange-200 bg-orange-50 text-center">
+            <div className="w-14 h-14 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-orange-300">
+              <Smartphone size={32} className="text-white" />
+            </div>
+            <h3 className="text-2xl font-bold italic font-italian text-slate-900 mb-3">
+              Complete Peace of Mind
+            </h3>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              Trip Mode, AI alerts, key-holder calls, and 2-year warranty for worry-free travel.
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -32,7 +32,20 @@ export default function DoggyDeraPage() {
 
       <div className="grid lg:grid-cols-2 gap-12">
         <div className="flex flex-col gap-4">
-          <ProductViewer3D colour="#e6dcc8" />
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-xl">
+            <Image
+              src={product?.image ?? "/images/doggy dera pic.png"}
+              alt={product?.name ?? "Doggy Dera"}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-bold text-orange-600">
+              ₹{product?.price}
+            </div>
+          </div>
+          <div className="mt-6"><ProductViewer3D colour="#e6dcc8" /></div>
           <div className="grid grid-cols-4 gap-2">
             {(product?.images ?? []).map((img, i) => (
               <img
