@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { CheckCircle, Home } from "lucide-react"
+import { CheckCircle } from "lucide-react"
 
 export default function OrderConfirmationPage() {
   const params = new URLSearchParams(typeof window === "undefined" ? "" : window.location.search)
@@ -45,9 +45,9 @@ export default function OrderConfirmationPage() {
       <div className="flex justify-center gap-4 mb-10">
         <Link
           href="/"
-          className="px-8 py-3 bg-orange-500 text-white rounded-xl font-semibold hover:bg-orange-600 transition"
+          className="px-6 py-3 bg-orange-500 text-white rounded-xl font-semibold hover:bg-orange-600 transition"
         >
-          <Home size={20} className="mr-2" /> Shop more
+          Shop more
         </Link>
       </div>
     </div>
