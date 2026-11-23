@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Image from "next/image"
+import nextDynamic from "next/dynamic"
 import { ProductCustomizer } from "@/components/product-customizer"
 import { FeatureCarousel } from "@/components/feature-carousel"
 import {
@@ -8,6 +8,20 @@ import {
   Phone,
 } from "lucide-react"
 import { getProduct } from "@/lib/products"
+
+export const dynamic = "force-dynamic"
+
+const ProductViewer3D = nextDynamic(
+  () => import("@/components/three/Tent3D").then((mod) => mod.ProductViewer3D),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="aspect-video bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
+        <div className="animate-pulse rounded-full w-16 h-16 bg-gray-300" />
+      </div>
+    ),
+  }
+)
 
 const ALERTS = [
   {
@@ -43,17 +57,7 @@ export default function MaharajaDeraPage() {
 
       <div className="grid lg:grid-cols-2 gap-12">
         <div className="flex flex-col gap-4">
-          <div
-            className="relative aspect-video rounded-2xl overflow-hidden border border-gray-200 bg-gray-100"
-          >
-            <Image
-              src={product?.image ?? "/images/maharaja-dera.jpg"}
-              alt={product?.name ?? "Maharaj Dera"}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
+          <ProductViewer3D colour="#b45309" />
           <div className="grid grid-cols-4 gap-2">
             {(product?.images ?? []).map((img, i) => (
               <img

@@ -1,31 +1,45 @@
 import Link from "next/link"
 import Image from "next/image"
+import nextDynamic from "next/dynamic"
 import { ArrowRight, ShieldCheck, Truck, ShieldAlert } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 
+export const dynamic = "force-dynamic"
+
 const [d, m] = PRODUCTS
+
+const Hero3D = nextDynamic(() => import("@/components/three/Tent3D").then((mod) => mod.Hero3D), {
+  ssr: false,
+  loading: () => (
+    <div className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50 flex items-center justify-center">
+      <div className="text-center animate-pulse">
+        <div className="w-24 h-24 rounded-full bg-orange-500 flex items-center justify-center mx-auto mb-4">
+          <span className="text-white font-bold">H</span>
+        </div>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+          A real home for your dog
+        </h1>
+      </div>
+    </div>
+  ),
+})
 
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50">
       {/* Hero */}
-      <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/80 to-black" />
-        <div className="absolute inset-0 bg-[url('/images/home%20page.png')] bg-cover bg-center bg-no-repeat opacity-30" />
-        {/* Decorative paw prints */}
-        <div className="absolute top-1/4 left-10 w-12 h-12 bg-orange-500/20 rounded-full blur-md" />
-        <div className="absolute top-1/3 right-10 w-8 h-8 bg-orange-500/20 rounded-full blur-md" />
-        <div className="absolute bottom-1/4 left-20 w-10 h-10 bg-orange-500/20 rounded-full blur-md" />
-        <div className="absolute bottom-1/3 right-20 w-14 h-14 bg-orange-500/20 rounded-full blur-md" />
-        <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
+      <section className="relative h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-slate-50">
+        <Hero3D />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none z-10" />
+        <div className="relative z-20 flex items-end justify-center pb-20 px-4 text-center pointer-events-none">
           <div className="max-w-4xl">
             <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-400 text-sm font-semibold tracking-wide uppercase mb-6">
               Now available
             </span>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
-              A real home<span className="text-orange-400"> for your dog</span>
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6 drop-shadow-lg">
+              A real home<span className="text-orange-500"> for your dog</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-100 mb-8 max-w-xl mx-auto leading-relaxed drop-shadow drop-shadow-black/40">
               Everyday comfort or royal luxury. Mesh airflow, food feeder, 3L steel water tank,
               AI comfort that switches on only when needed. Delivered in 3-5 days.
             </p>

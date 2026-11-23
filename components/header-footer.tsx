@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useCart } from "@/components/use-cart"
 import { ShoppingCart, Menu, X, Phone, Mail, MapPin, Clock } from "lucide-react"
+import { FloatingCartButton } from "@/components/cart-interactive"
 
 export function Header() {
   const { itemCount } = useCart()
@@ -119,6 +120,8 @@ export function Header() {
           </div>
         </div>
       )}
+
+      <FloatingCartButton itemCount={itemCount} />
     </>
   )
 }
